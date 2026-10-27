@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Grammar: Indirect Object Pronouns</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Sound Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <!-- Visual Effects (Confetti) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            /* Gamified App Theme Colors */
+            --primary-color: #059669; /* Emerald Green */
+            --primary-shadow: #047857;
+            --accent-color: #f59e0b; /* Amber */
+            --accent-shadow: #d97706;
+            --green: #10b981;
+            --green-shadow: #059669;
+            --red: #ef4444;
+            --red-shadow: #dc2626;
+            --blue: #3b82f6;
+            --blue-shadow: #2563eb;
+            --purple: #8b5cf6;
+            --purple-shadow: #7c3aed;
+            --bg-main: #f0fdf4;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --card-bg: #ffffff;
+            --border-color: #000000;
+            --card-radius: 16px;
+            --btn-radius: 12px;
+        }
+
+        body.dark-mode {
+            --bg-main: #064e3b;
+            --text-main: #ecfdf5;
+            --text-muted: #a7f3d0;
+            --card-bg: #0f766e;
+            --border-color: #022c22;
+            --primary-color: #10b981;
+            --primary-shadow: #059669;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-main);
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: -19px -19px;
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Headers & Cards */
+        header {
+            background: var(--card-bg);
+            border: 4px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 0 var(--border-color);
+            margin-bottom: 25px;
+            transform: rotate(-1deg);
+        }
+        
+        .header-title-wrapper { display: flex; align-items: center; gap: 20px; }
+        .header-mascot { font-size: 4em; animation: bounce 2s infinite; filter: drop-shadow(0 4px 0 rgba(0,0,0,0.2)); }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        header h1 { margin: 0; font-size: 2.5em; font-weight: 900; color: var(--primary-color); text-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+        header p { margin: 5px 0 0; font-size: 1.2em; color: var(--text-muted); font-weight: 800; }
+
+        .control-button {
+            background: var(--card-bg); border: 3px solid var(--border-color); border-bottom: 6px solid var(--border-color);
+            border-radius: var(--btn-radius); padding: 10px 15px; font-weight: 900; font-size: 1.2em; cursor: pointer;
+            transition: 0.1s; color: var(--text-main);
+        }
+        .control-button:active { transform: translateY(4px); border-bottom-width: 2px; }
+
+        /* Navigation Tabs */
+        .main-tab-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .main-tab-nav button {
+            background: var(--card-bg); border: 4px solid var(--border-color); border-bottom: 8px solid var(--border-color);
+            border-radius: var(--card-radius); padding: 20px 10px; font-size: 1.3em; font-weight: 900; color: var(--text-muted);
+            cursor: pointer; transition: all 0.1s; display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+        .main-tab-nav button i { font-size: 2.5em; font-style: normal; }
+        .main-tab-nav button:active { transform: translateY(6px); border-bottom-width: 2px; }
+        .main-tab-nav button.active { background: var(--primary-color); color: white; border-color: var(--border-color); border-bottom-color: var(--primary-shadow); transform: scale(1.05) rotate(-2deg); z-index: 10;}
+        
+        .main-tab-content { display: none; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .main-tab-content.is-active { display: block; }
+        @keyframes popIn { 0% { opacity: 0; transform: scale(0.9) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+        .shake-fx { animation: shake 0.4s; }
+
+        /* Cards */
+        .app-card { background: var(--card-bg); border: 4px solid var(--border-color); border-radius: var(--card-radius); padding: 30px; margin-bottom: 30px; box-shadow: 0 10px 0 var(--border-color); }
+        .app-card-title { font-size: 2em; font-weight: 900; margin-top: 0; display: flex; align-items: center; gap: 15px; border-bottom: 4px dashed var(--border-color); padding-bottom: 15px; }
+
+        /* Buttons */
+        .button-primary, .button-secondary { border-radius: var(--btn-radius); padding: 15px 30px; font-size: 1.2em; font-weight: 900; cursor: pointer; transition: all 0.1s; border: 4px solid var(--border-color); text-transform: uppercase; letter-spacing: 1px;}
+        .button-primary { background: var(--accent-color); color: var(--border-color); border-bottom: 8px solid var(--accent-shadow); }
+        .button-primary:active { transform: translateY(6px); border-bottom-width: 2px; }
+        .button-secondary { background: var(--blue); color: white; border-bottom: 8px solid var(--blue-shadow); }
+        .button-secondary:active { transform: translateY(6px); border-bottom-width: 2px; }
+
+        /* INTERACTIVE "WHAT ARE THEY" */
+        .magic-box { display: flex; justify-content: center; align-items: center; gap: 30px; margin: 40px 0; flex-wrap: wrap; }
+        .interactive-noun {
+            background: var(--purple); color: white; border: 4px solid var(--border-color); border-bottom: 10px solid var(--border-color);
+            border-radius: 20px; padding: 40px; font-size: 2em; font-weight: 900; cursor: pointer; transition: 0.2s;
+            display: flex; flex-direction: column; align-items: center; gap: 10px; width: 320px; text-align: center;
+        }
+        .interactive-noun:hover { transform: scale(1.05); }
+        .interactive-noun:active { transform: scale(0.95) translateY(8px); border-bottom-width: 2px; }
+        .interactive-noun.transformed { background: var(--accent-color); color: var(--border-color); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        /* INTERACTIVE VISUALIZER */
+        .viz-arena { background: var(--bg-main); border: 4px dashed var(--border-color); border-radius: 20px; padding: 30px; margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; min-height: 200px; position: relative;}
+        .sentence-track { display: flex; gap: 15px; font-size: 2em; font-weight: 900; flex-wrap: wrap; justify-content: center;}
+        .word-block { background: var(--card-bg); border: 4px solid var(--border-color); padding: 15px 25px; border-radius: 16px; border-bottom: 8px solid var(--border-color); position: relative; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); color: var(--text-main); }
+        .word-io { background: var(--purple); color: white; cursor: pointer; z-index: 10; }
+        .word-io:hover::after { content: 'Click to Shrink & Move!'; position: absolute; top: -45px; left: 50%; transform: translateX(-50%); background: #000; color: #fff; font-size: 14px; padding: 8px 12px; border-radius: 8px; white-space: nowrap; }
+        .word-io.transformed { background: var(--accent-color); color: var(--border-color); }
+        .word-verb { background: var(--blue); color: white; }
+        
+        /* INTERACTIVE RULES - FLIPC ARDS */
+        .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
+        .rule-flip { perspective: 1000px; height: 180px; cursor: pointer; }
+        .rule-inner { width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; position: relative; }
+        .rule-flip:hover .rule-inner, .rule-flip.active .rule-inner { transform: rotateY(180deg); }
+        .rule-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 4px solid var(--border-color); border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 1.5em; font-weight: 900; text-align: center; padding: 10px; color: var(--text-main);}
+        .rule-front { background: var(--card-bg); border-bottom: 8px solid var(--border-color); }
+        .rule-back { background: var(--primary-color); color: white; transform: rotateY(180deg); border-bottom: 8px solid var(--border-color); }
+        
+        /* SENTENCE BUILDER */
+        .builder-pool { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; min-height: 70px; flex-wrap: wrap;}
+        .builder-slot { border: 4px dashed var(--border-color); background: rgba(0,0,0,0.05); border-radius: 16px; width: 140px; height: 70px; display: flex; justify-content: center; align-items: center; }
+        .builder-word { background: var(--accent-color); color: var(--border-color); border: 4px solid var(--border-color); border-bottom: 6px solid var(--border-color); padding: 10px 20px; border-radius: 12px; font-weight: 900; font-size: 1.5em; cursor: grab; }
+        .builder-word:active { cursor: grabbing; }
+
+        /* Activity 3 only: prevent iPad text selection and native touch gestures while dragging. */
+        #dd-batch-container .builder-word {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            touch-action: none;
+            -webkit-user-drag: none;
+        }
+
+        /* CLARIFIER MINIGAME */
+        .personal-a-line { font-size: 1.6em; font-weight: 900; display: flex; align-items: center; gap: 15px; margin: 15px 0; background: var(--bg-main); padding: 15px; border-radius: 16px; border: 4px solid var(--border-color); flex-wrap: wrap;}
+        .a-toggle { background: var(--card-bg); color: var(--text-main); border: 4px solid var(--border-color); border-bottom: 6px solid var(--border-color); padding: 10px 20px; border-radius: 12px; font-weight: 900; font-size: 1.2em; cursor: pointer; min-width: 100px; transition: 0.1s; }
+        .a-toggle.correct { background: var(--green); color: white; }
+        .a-toggle.wrong { background: var(--red); color: white; }
+
+        /* QUIZ UI */
+        .quiz-question { background: var(--bg-main); border: 4px solid var(--border-color); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 6px 0 var(--border-color); }
+        .quiz-question p { font-size: 1.5em; font-weight: 900; margin-top: 0; }
+        .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .quiz-options button {
+            background: var(--card-bg); border: 4px solid var(--border-color); border-bottom: 8px solid var(--border-color);
+            border-radius: 16px; padding: 20px; font-size: 1.3em; font-weight: 900; cursor: pointer;
+            transition: 0.1s; color: var(--text-main);
+        }
+        .quiz-options button:active:not(:disabled) { transform: translateY(6px); border-bottom-width: 2px; }
+        
+        .feedback-area { padding: 20px; border-radius: 16px; font-weight: 900; font-size: 1.5em; text-align: center; display: none; margin-top: 15px; border: 4px solid var(--border-color); box-shadow: 0 6px 0 var(--border-color); }
+        .feedback-area.correct { display: block; background: var(--green); color: white; }
+        .feedback-area.incorrect { display: block; background: var(--red); color: white; }
+
+        /* FLASHCARDS */
+        .flashcard-container { perspective: 1000px; width: 100%; max-width: 600px; height: 350px; margin: 0 auto 30px; cursor: pointer; }
+        .flashcard { width: 100%; height: 100%; position: relative; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
+        .flashcard.is-flipped { transform: rotateY(180deg); }
+        .card-face {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-radius: 24px; padding: 40px; text-align: center; font-size: 2.2em; font-weight: 900;
+            border: 4px solid var(--border-color); border-bottom: 12px solid var(--border-color); box-sizing: border-box;
+            background-image: radial-gradient(rgba(0,0,0,0.05) 2px, transparent 2px); background-size: 20px 20px;
+        }
+        .card-front { background: var(--card-bg); color: var(--text-main); }
+        .card-back { background: var(--primary-color); color: white; transform: rotateY(180deg); }
+        .card-back p { font-size: 0.6em; font-weight: 800; opacity: 0.9; margin-top: 20px; }
+        
+        .tts-icon { display: inline-block; cursor: pointer; transition: 0.2s; font-size: 1.2em; background: rgba(0,0,0,0.1); padding: 5px 15px; border-radius: 50px; border: 2px solid var(--border-color); }
+        .tts-icon:hover { transform: scale(1.1); background: var(--accent-color); }
+        .tts-icon:active { transform: scale(0.9); }
+
+        @media (max-width: 768px) {
+            .main-tab-nav { grid-template-columns: 1fr 1fr; }
+            header { flex-direction: column; text-align: center; transform: none; }
+            .sentence-track { font-size: 1.3em; flex-wrap: wrap; }
+            .builder-pool { flex-wrap: wrap; }
+            .word-block { padding: 10px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="header-title-wrapper">
+                <div class="header-mascot">🎁</div>
+                <div>
+                    <h1 data-lang-key="header_title">Indirect Object Pronouns</h1>
+                    <p data-lang-key="header_subtitle">To whom? For whom? Find out!</p>
+                </div>
+            </div>
+            <div style="display:flex; gap: 10px;">
+                <button id="theme-toggle" class="control-button" onclick="toggleTheme()">🌙</button>
+                <button id="lang-toggle" class="control-button" onclick="playSound('pop')">🇺🇸 / 🇪🇸</button>
+            </div>
+        </header>
+        
+        <nav class="main-tab-nav">
+            <button class="main-tab-link active" onclick="changeMainTab(event, 'tab-concept')"><i>💡</i> Concept</button>
+            <button class="main-tab-link" onclick="changeMainTab(event, 'tab-rules')"><i>🧩</i> Rules</button>
+            <button class="main-tab-link" onclick="changeMainTab(event, 'tab-practice')"><i>🎮</i> Play</button>
+            <button class="main-tab-link" onclick="changeMainTab(event, 'tab-flashcards')"><i>🃏</i> Cards</button>
+        </nav>
+
+        <main>
+            <!-- TAB 1: THE BIG IDEA -->
+            <div id="tab-concept" class="main-tab-content is-active">
+                <div class="app-card">
+                    <h2 class="app-card-title">🔍 What are they? <span class="tts-icon" onclick="speakText('Un objeto indirecto indica a quién o para quién es la acción.')">🔊</span></h2>
+                    <p style="font-size: 1.4em; font-weight: 800; text-align: center;">Indirect Objects tell us <strong>TO WHOM</strong> or <strong>FOR WHOM</strong> an action is done. Pronouns are magical shortcuts! <br><strong>Click the heavy receiver below to use magic!</strong></p>
+                    
+                    <div class="magic-box">
+                        <div id="magic-item" class="interactive-noun" onclick="transformMagicNoun()">
+                            <span style="font-size: 3em;">👵</span>
+                            <span>a mi abuela</span>
+                            <small style="font-size: 0.5em; opacity: 0.8;">(To whom? The receiver)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <h2 class="app-card-title">🪄 Word Order Visualizer <span class="tts-icon" onclick="speakText('Yo le doy las flores.')">🔊</span></h2>
+                    <p style="font-size: 1.3em; font-weight: 800;">In Spanish, the Indirect Object Pronoun jumps <strong>BEFORE</strong> the conjugated verb! <br><strong>Click the purple noun phrase to replace and move it.</strong></p>
+                    
+                    <div class="viz-arena" id="viz-arena">
+                        <div class="sentence-track" id="viz-track">
+                            <div class="word-block" style="order: 1;">Yo</div>
+                            <div class="word-block word-verb" id="viz-verb" style="order: 3;">doy</div>
+                            <div class="word-block" id="viz-do" style="order: 4;">las flores</div>
+                            <div class="word-block word-io" id="viz-obj" style="order: 5;" onclick="animateVisualizer()">a María</div>
+                        </div>
+                        <button class="button-secondary" onclick="resetVisualizer()" style="margin-top: 20px;">🔄 Reset Sentence</button>
+                    </div>
+                </div>
+
+                <!-- EMBEDDED GOOGLE DRIVE VIDEO -->
+                <div class="app-card">
+                    <h2 class="app-card-title">📺 Video Tutorial</h2>
+                    <p style="font-size: 1.2em; font-weight: 800;">Watch this lesson on Indirect Object Pronouns to solidify what you've learned!</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 16px; border: 4px solid var(--border-color); box-shadow: 0 8px 0 var(--border-color); margin-top: 20px;">
+                        <iframe src="https://drive.google.com/file/d/17Zqdq7I-x8Ew5CO5MGnTcN-S07EjwdAh/preview" width="640" height="480" allow="autoplay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: RULES & FORMS -->
+            <div id="tab-rules" class="main-tab-content">
+                <div class="app-card">
+                    <h2 class="app-card-title">🎴 Memory Rules <span class="tts-icon" onclick="speakText('me, te, le, nos, os, les')">🔊</span></h2>
+                    <p style="font-size: 1.3em; font-weight: 800; text-align: center;">Hover or tap to reveal the correct Indirect Object Pronoun!</p>
+                    
+                    <div class="rules-grid">
+                        <div class="rule-flip" onclick="playSound('flip')">
+                            <div class="rule-inner">
+                                <div class="rule-face rule-front">🙋‍♂️ To / For <strong>Me</strong> <br><br> <span style="font-size:2em;">❓</span></div>
+                                <div class="rule-face rule-back" style="background: var(--primary-color)">me</div>
+                            </div>
+                        </div>
+                        <div class="rule-flip" onclick="playSound('flip')">
+                            <div class="rule-inner">
+                                <div class="rule-face rule-front">👉 To / For <strong>You</strong> <br><br> <span style="font-size:2em;">❓</span></div>
+                                <div class="rule-face rule-back" style="background: var(--blue)">te</div>
+                            </div>
+                        </div>
+                        <div class="rule-flip" onclick="playSound('flip')">
+                            <div class="rule-inner">
+                                <div class="rule-face rule-front">🧍‍♂️🧍‍♀️ To / For <strong>Him, Her, It, You (form)</strong> <br><br> <span style="font-size:2em;">❓</span></div>
+                                <div class="rule-face rule-back" style="background: var(--purple)">le</div>
+                            </div>
+                        </div>
+                        <div class="rule-flip" onclick="playSound('flip')">
+                            <div class="rule-inner">
+                                <div class="rule-face rule-front">🫂 To / For <strong>Us</strong> <br><br> <span style="font-size:2em;">❓</span></div>
+                                <div class="rule-face rule-back" style="background: var(--primary-color)">nos</div>
+                            </div>
+                        </div>
+                        <div class="rule-flip" onclick="playSound('flip')">
+                            <div class="rule-inner">
+                                <div class="rule-face rule-front">🇪🇸 To / For <strong>You all (Spain)</strong> <br><br> <span style="font-size:2em;">❓</span></div>
+                                <div class="rule-face rule-back" style="background: var(--blue)">os</div>
+                            </div>
+                        </div>
+                        <div class="rule-flip" onclick="playSound('flip')">
+                            <div class="rule-inner">
+                                <div class="rule-face rule-front">👨‍👩‍👧‍👦 To / For <strong>Them, You all</strong> <br><br> <span style="font-size:2em;">❓</span></div>
+                                <div class="rule-face rule-back" style="background: var(--purple)">les</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <h2 class="app-card-title">🏗️ Sentence Builder <span class="tts-icon" onclick="speakText('Yo le compro un libro.')">🔊</span></h2>
+                    <p style="font-size: 1.2em; font-weight: 800;">Drag and drop the words into the correct order. <em>"I buy a book for him/her."</em></p>
+                    
+                    <div class="builder-pool" id="word-pool">
+                        <div class="builder-word" draggable="true" id="w1">le</div>
+                        <div class="builder-word" draggable="true" id="w2">Yo</div>
+                        <div class="builder-word" draggable="true" id="w3">compro</div>
+                        <div class="builder-word" draggable="true" id="w4">un libro</div>
+                    </div>
+                    <div class="builder-pool" id="drop-slots">
+                        <div class="builder-slot" data-expected="w2"></div>
+                        <div class="builder-slot" data-expected="w1"></div>
+                        <div class="builder-slot" data-expected="w3"></div>
+                        <div class="builder-slot" data-expected="w4"></div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="button-primary" onclick="checkSentenceBuilder()">Check Order</button>
+                        <div id="builder-feedback" class="feedback-area"></div>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <h2 class="app-card-title">🎯 The Clarifier Minigame</h2>
+                    <p style="font-size: 1.2em; font-weight: 800;">Because "le" and "les" can mean multiple things, Spanish often uses "a + [person]" to clarify. Match the pronoun to the clarifier! Click [ ? ] to cycle options.</p>
+                    
+                    <div class="personal-a-line">
+                        1. Juan <button class="clarifier-toggle" data-answer="le" onclick="cycleClarifier(this)">[ ? ]</button> da el regalo <strong>a Ana</strong>.
+                    </div>
+                    <div class="personal-a-line">
+                        2. El profesor <button class="clarifier-toggle" data-answer="nos" onclick="cycleClarifier(this)">[ ? ]</button> explica la lección <strong>a nosotros</strong>.
+                    </div>
+                    <div class="personal-a-line">
+                        3. Yo <button class="clarifier-toggle" data-answer="les" onclick="cycleClarifier(this)">[ ? ]</button> digo la verdad <strong>a mis padres</strong>.
+                    </div>
+                    <div class="personal-a-line">
+                        4. ¿Tú <button class="clarifier-toggle" data-answer="me" onclick="cycleClarifier(this)">[ ? ]</button> escribes una carta <strong>a mí</strong>?
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="button-primary" onclick="checkClarifier()">Verify Answers</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: PRACTICE LAB -->
+            <div id="tab-practice" class="main-tab-content">
+                <div class="app-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:4px dashed var(--border-color); padding-bottom:15px; margin-bottom:20px;">
+                        <h2 class="app-card-title" style="border:none; margin:0; padding:0;">🏆 Actividad 1: Multiple Choice</h2>
+                        <button onclick="generateQuiz()" class="button-secondary">🔄 Refresh</button>
+                    </div>
+                    <div id="quiz-container"></div>
+                </div>
+
+                <div class="app-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:4px dashed var(--border-color); padding-bottom:15px; margin-bottom:20px;">
+                        <h2 class="app-card-title" style="border:none; margin:0; padding:0;">📖 Actividad 2: Completar</h2>
+                        <button onclick="generateFillIn()" class="button-secondary">🔄 Refresh</button>
+                    </div>
+                    <p style="font-size: 1.2em; font-weight: 800;">Lee la oración y selecciona el pronombre de objeto indirecto correcto.</p>
+                    <div id="story-container" style="line-height: 2.5; font-size: 1.2em; font-weight: 700; background: var(--bg-main); padding: 20px; border-radius: 16px; border: 4px solid var(--border-color);">
+                        <!-- Fill in generated by JS -->
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="button-primary" onclick="checkFillIn()">Check Answers</button>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:4px dashed var(--border-color); padding-bottom:15px; margin-bottom:20px;">
+                        <h2 class="app-card-title" style="border:none; margin:0; padding:0;">🧩 Actividad 3: Drag & Drop</h2>
+                        <button onclick="generatePracticeDD()" class="button-secondary">🔄 Refresh</button>
+                    </div>
+                    <p style="font-size: 1.2em; font-weight: 800; text-align: center;" id="practice-dd-instruction">Arrastra las palabras para formar la oración correcta.</p>
+                    
+                    <div id="dd-batch-container"></div>
+                    
+                    <div style="text-align: center; margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+                        <button class="button-primary" onclick="checkPracticeDD()">Check Answers</button>
+                    </div>
+                    <div id="practice-dd-feedback" class="feedback-area"></div>
+                </div>
+            </div>
+
+            <!-- TAB 4: FLASHCARDS -->
+            <div id="tab-flashcards" class="main-tab-content">
+                <div class="app-card">
+                    <h2 class="app-card-title" style="justify-content: center;">⚡ Speed Flashcards</h2>
+                    <p style="font-weight: 800; text-align: center; font-size: 1.3em; margin-bottom: 30px;">Read the sentence. Guess the pronoun for the missing receiver. Click to flip!</p>
+                    
+                    <div class="flashcard-container" onclick="flipMainCard()">
+                        <div class="flashcard" id="main-flashcard">
+                            <div class="card-face card-front" id="main-card-front"></div>
+                            <div class="card-face card-back" id="main-card-back"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 20px;">
+                        <button onclick="prevMainCard()" class="button-secondary">⬅️ Prev</button>
+                        <button onclick="nextMainCard()" class="button-primary">Next ➡️</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // --- 1. AUDIO SYSTEM (Tone.js) ---
+        let audioInit = false;
+        const synths = {};
+
+        function initAudio() {
+            if(audioInit) return;
+            Tone.start();
+            synths.pop = new Tone.Synth({ oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination();
+            synths.correct = new Tone.PolySynth(Tone.Synth, { oscillator: { type: "triangle" } }).toDestination();
+            synths.wrong = new Tone.Synth({ oscillator: { type: "sawtooth" }, envelope: { attack: 0.1, decay: 0.2, sustain: 0.2, release: 0.2 } }).toDestination();
+            synths.flip = new Tone.NoiseSynth({ noise: { type: "pink" }, envelope: { attack: 0.01, decay: 0.1 } }).toDestination();
+            synths.magic = new Tone.PolySynth(Tone.Synth, { oscillator: { type: "sine" } }).toDestination();
+            audioInit = true;
+        }
+
+        document.body.addEventListener('click', initAudio, { once: true });
+
+        function playSound(type) {
+            if(!audioInit || Tone.context.state !== 'running') return;
+            const now = Tone.now();
+            switch(type) {
+                case 'pop': synths.pop.triggerAttackRelease("C6", "32n", now); break;
+                case 'correct': 
+                    synths.correct.triggerAttackRelease(["C5", "E5", "G5"], "8n", now); 
+                    confetti({particleCount: 100, spread: 70, origin: {y: 0.6}});
+                    break;
+                case 'wrong': synths.wrong.triggerAttackRelease("C3", "8n", now); break;
+                case 'flip': synths.flip.triggerAttackRelease("16n", now); break;
+                case 'magic': synths.magic.triggerAttackRelease(["G4", "C5", "E5", "G5"], "4n", now); break;
+            }
+        }
+
+        // --- 2. ROBUST TTS SYSTEM ---
+        function speakText(text) {
+            if(!window.speechSynthesis) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.9;
+            
+            const voices = window.speechSynthesis.getVoices();
+            if(voices.length > 0) {
+                const esVoices = voices.filter(v => v.lang.startsWith('es'));
+                let selectedVoice = esVoices.find(v => v.name.includes('Premium') || v.name.includes('Siri') || v.name.includes('Google') || v.name.includes('Enhanced'));
+                if (!selectedVoice && esVoices.length > 0) selectedVoice = esVoices[0];
+                if (selectedVoice) utterance.voice = selectedVoice;
+            }
+            window.speechSynthesis.speak(utterance);
+        }
+        
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        }
+
+        // --- 3. TAB & THEME LOGIC ---
+        function toggleTheme() {
+            playSound('pop');
+            document.body.classList.toggle('dark-mode');
+            const btn = document.getElementById('theme-toggle');
+            btn.innerText = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        function changeMainTab(evt, tabId) {
+            playSound('pop');
+            document.querySelectorAll(".main-tab-content").forEach(c => c.classList.remove("is-active"));
+            document.querySelectorAll(".main-tab-link").forEach(l => l.classList.remove("active"));
+            
+            document.getElementById(tabId).classList.add("is-active");
+            evt.currentTarget.classList.add("active");
+
+            if (tabId === 'tab-practice' && document.getElementById('quiz-container').innerHTML === "") {
+                generateQuiz();
+            }
+        }
+
+        // --- 4. INTERACTIVE: WHAT ARE THEY & VISUALIZER ---
+        function transformMagicNoun() {
+            const item = document.getElementById('magic-item');
+            if (!item.classList.contains('transformed')) {
+                playSound('magic');
+                item.innerHTML = `<span style="font-size: 3em;">🪄</span><span>le</span><small style="font-size: 0.5em; opacity: 0.8;">(To her)</small>`;
+                item.classList.add('transformed');
+                speakText('le');
+            } else {
+                playSound('pop');
+                item.innerHTML = `<span style="font-size: 3em;">👵</span><span>a mi abuela</span><small style="font-size: 0.5em; opacity: 0.8;">(To whom? The receiver)</small>`;
+                item.classList.remove('transformed');
+            }
+        }
+
+        function animateVisualizer() {
+            const obj = document.getElementById('viz-obj');
+            if(!obj.classList.contains('transformed')) {
+                playSound('magic');
+                obj.innerText = 'le';
+                obj.style.order = '2'; // Moves between 'Yo' (1) and 'doy' (3)
+                obj.classList.add('transformed');
+                speakText('Yo le doy las flores.');
+            }
+        }
+
+        function resetVisualizer() {
+            playSound('pop');
+            const obj = document.getElementById('viz-obj');
+            obj.innerText = 'a María';
+            obj.style.order = '5';
+            obj.classList.remove('transformed');
+        }
+
+        // --- 5. INTERACTIVE: SENTENCE BUILDER ---
+        let draggedWord = null;
+        
+        function attachBuilderDragEvents() {
+            document.querySelectorAll('.builder-word').forEach(word => {
+                word.addEventListener('dragstart', function() { draggedWord = this; setTimeout(() => this.style.opacity = '0.5', 0); });
+                word.addEventListener('dragend', function() { draggedWord = null; this.style.opacity = '1'; });
+            });
+
+            document.querySelectorAll('.builder-slot, .builder-pool').forEach(slot => {
+                slot.addEventListener('dragover', e => e.preventDefault());
+                slot.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if(draggedWord && !this.classList.contains('builder-word')) {
+                        if (this.closest('#tab-rules')) {
+                            playSound('pop');
+                            this.appendChild(draggedWord);
+                        }
+                    }
+                });
+            });
+        }
+        attachBuilderDragEvents();
+
+        function checkSentenceBuilder() {
+            const slots = document.querySelectorAll(`#drop-slots .builder-slot`);
+            let isCorrect = true;
+            let count = 0;
+            let fullSentence = [];
+
+            slots.forEach(slot => {
+                const word = slot.querySelector('.builder-word');
+                if (word) {
+                    count++;
+                    fullSentence.push(word.innerText);
+                }
+                if (!word || word.id !== slot.dataset.expected) {
+                    isCorrect = false;
+                }
+            });
+
+            const fb = document.getElementById(`builder-feedback`);
+            if (count < slots.length) {
+                fb.className = 'feedback-area incorrect';
+                fb.innerText = "Drag all words into the boxes first!";
+                playSound('wrong');
+                fb.parentElement.classList.add('shake-fx');
+                setTimeout(() => fb.parentElement.classList.remove('shake-fx'), 400);
+            } else if (isCorrect) {
+                fb.className = 'feedback-area correct';
+                fb.innerText = `🌟 Perfect! ${fullSentence.join(" ")}`;
+                playSound('correct');
+                speakText(fullSentence.join(" "));
+            } else {
+                fb.className = 'feedback-area incorrect';
+                fb.innerText = "❌ Not quite. Remember: Pronoun BEFORE the verb!";
+                playSound('wrong');
+                fb.parentElement.classList.add('shake-fx');
+                setTimeout(() => fb.parentElement.classList.remove('shake-fx'), 400);
+            }
+        }
+
+        // --- 6. INTERACTIVE: CLARIFIER MINIGAME ---
+        const clarifierOptions = ["[ ? ]", "me", "te", "le", "nos", "les"];
+        
+        function cycleClarifier(btn) {
+            playSound('pop');
+            let currentIdx = clarifierOptions.indexOf(btn.innerText);
+            let nextIdx = (currentIdx + 1) % clarifierOptions.length;
+            btn.innerText = clarifierOptions[nextIdx];
+            btn.classList.remove('correct', 'wrong');
+        }
+
+        function checkClarifier() {
+            const toggles = document.querySelectorAll('.clarifier-toggle');
+            let allCorrect = true;
+            toggles.forEach(t => {
+                if(t.innerText === t.dataset.answer) {
+                    t.classList.add('correct');
+                    t.classList.remove('wrong');
+                } else {
+                    t.classList.add('wrong');
+                    t.classList.remove('correct');
+                    allCorrect = false;
+                }
+            });
+
+            if(allCorrect) playSound('correct');
+            else playSound('wrong');
+        }
+
+        // --- 7. PRACTICE LAB (QUIZ) ---
+        const quizBank = [
+            { es: "Yo _____ doy el libro a Juan.", en: "I give the book to Juan.", options: ["le", "lo", "les", "me"], correct: "le" },
+            { es: "Ellos _____ escriben una carta a nosotros.", en: "They write a letter to us.", options: ["nos", "les", "los", "me"], correct: "nos" },
+            { es: "¿Tú _____ compras un regalo a tu hermana?", en: "Are you buying a gift for your sister?", options: ["le", "la", "te", "les"], correct: "le" },
+            { es: "Mis padres _____ mandan dinero a mí.", en: "My parents send money to me.", options: ["me", "te", "le", "les"], correct: "me" },
+            { es: "El profesor _____ explica la lección a los estudiantes.", en: "The teacher explains the lesson to the students.", options: ["les", "los", "le", "nos"], correct: "les" },
+            { es: "Nosotros _____ decimos la verdad a ti.", en: "We tell the truth to you.", options: ["te", "le", "me", "nos"], correct: "te" },
+            { es: "Ana _____ prepara la cena a sus hijos.", en: "Ana prepares dinner for her children.", options: ["les", "los", "le", "las"], correct: "les" },
+            { es: "El camarero _____ sirve la comida a nosotros.", en: "The waiter serves the food to us.", options: ["nos", "les", "le", "los"], correct: "nos" },
+            { es: "Yo _____ presto mi coche a mi amigo.", en: "I lend my car to my friend.", options: ["le", "lo", "les", "me"], correct: "le" },
+            { es: "¿Quién _____ da este regalo a mí?", en: "Who is giving this gift to me?", options: ["me", "te", "le", "nos"], correct: "me" }
+        ];
+
+        function generateQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = "";
+            let shuffledBank = [...quizBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+            
+            shuffledBank.forEach((q, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'quiz-question';
+                
+                let esText = q.es.replace("_____", `<span style="color:var(--primary-color); font-weight:900;">_____</span>`);
+
+                let optionsHTML = [...q.options].sort(() => 0.5 - Math.random()).map(opt => 
+                    `<button onclick="checkQuizAnswer(this, '${opt}', '${q.correct}')">${opt}</button>`
+                ).join('');
+
+                let ttsText = q.es.replace("_____", "...");
+
+                qDiv.innerHTML = `
+                    <p>${index + 1}. ${esText} <span class="tts-icon" onclick="speakText('${ttsText}')">🔊</span><br>
+                    <small style="color:var(--text-muted)"><em>${q.en}</em></small></p>
+                    <div class="quiz-options">${optionsHTML}</div>
+                    <div class="feedback-area"></div>
+                `;
+                container.appendChild(qDiv);
+            });
+        }
+
+        window.checkQuizAnswer = function(btn, selected, correct) {
+            const container = btn.parentElement.nextElementSibling;
+            const buttons = btn.parentElement.querySelectorAll('button');
+            buttons.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; });
+            btn.style.opacity = '1';
+            
+            if (selected === correct) {
+                btn.style.borderColor = 'var(--green)';
+                btn.style.background = 'var(--green)';
+                btn.style.color = 'white';
+                container.className = 'feedback-area correct';
+                container.innerHTML = `✅ ¡Excelente!`;
+                playSound('correct');
+            } else {
+                btn.style.borderColor = 'var(--red)';
+                btn.style.background = 'var(--red)';
+                btn.style.color = 'white';
+                container.className = 'feedback-area incorrect';
+                container.innerHTML = `❌ Oops! La respuesta es: '${correct}'.`;
+                playSound('wrong');
+                btn.closest('.quiz-question').classList.add('shake-fx');
+                setTimeout(() => btn.closest('.quiz-question').classList.remove('shake-fx'), 400);
+            }
+        }
+
+        // --- 7B. FILL IN THE BLANKS ACTIVITY ---
+        const fillInBank = [
+            { before: "1. Juan ", after: " habla a ti.", answer: "te" },
+            { before: "2. Nosotros ", after: " damos las gracias a ellos.", answer: "les" },
+            { before: "3. Yo ", after: " pregunto la hora al señor.", answer: "le" },
+            { before: "4. Tú ", after: " dices la verdad a tus padres.", answer: "les" },
+            { before: "5. Ella ", after: " canta una canción a mí.", answer: "me" },
+            { before: "6. El doctor ", after: " receta medicina a nosotros.", answer: "nos" },
+            { before: "7. ¿Por qué no ", after: " compras flores a tu novia?", answer: "le" },
+            { before: "8. Ellos ", after: " traen el correo a mí todos los días.", answer: "me" }
+        ];
+
+        function generateFillIn() {
+            const container = document.getElementById('story-container');
+            let html = "";
+            let shuffled = [...fillInBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+            
+            shuffled.forEach((part, index) => {
+                html += `<div style="margin-bottom: 15px; border-bottom: 2px dashed var(--border-color); padding-bottom: 10px;">
+                    <span>${part.before}</span>
+                    <select class="story-select" data-answer="${part.answer.toLowerCase()}" style="padding: 5px; border-radius: 8px; border: 3px solid var(--border-color); font-weight: 900; margin: 0 5px; cursor:pointer;">
+                        <option value="">???</option>
+                        <option value="me">me</option>
+                        <option value="te">te</option>
+                        <option value="le">le</option>
+                        <option value="nos">nos</option>
+                        <option value="les">les</option>
+                    </select>
+                    <span>${part.after}</span>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function checkFillIn() {
+            const selects = document.querySelectorAll('.story-select');
+            let allCorrect = true;
+            selects.forEach(select => {
+                if (select.value.toLowerCase() === select.dataset.answer) {
+                    select.style.backgroundColor = "var(--green)";
+                    select.style.color = "white";
+                } else {
+                    select.style.backgroundColor = "var(--red)";
+                    select.style.color = "white";
+                    allCorrect = false;
+                }
+            });
+            if (allCorrect) {
+                playSound('correct');
+            } else {
+                playSound('wrong');
+                document.getElementById('story-container').classList.add('shake-fx');
+                setTimeout(() => document.getElementById('story-container').classList.remove('shake-fx'), 400);
+            }
+        }
+
+        // --- 7C. PRACTICE DRAG AND DROP ---
+        const practiceDDBank = [
+            { en: "I give him a gift.", words: ["le", "un regalo.", "Yo", "doy"], correct: ["Yo", "le", "doy", "un regalo."] },
+            { en: "They buy us food.", words: ["comida.", "nos", "Ellos", "compran"], correct: ["Ellos", "nos", "compran", "comida."] },
+            { en: "Do you write me a letter?", words: ["escribes", "¿Tú", "una carta?", "me"], correct: ["¿Tú", "me", "escribes", "una carta?"] },
+            { en: "We tell them the truth.", words: ["decimos", "les", "la verdad.", "Nosotros"], correct: ["Nosotros", "les", "decimos", "la verdad."] },
+            { en: "She sings a song to you.", words: ["una canción.", "te", "Ella", "canta"], correct: ["Ella", "te", "canta", "una canción."] }
+        ];
+
+        let currentDDBatchData = [];
+
+        function generatePracticeDD() {
+            const container = document.getElementById('dd-batch-container');
+            container.innerHTML = '';
+            currentDDBatchData = [...practiceDDBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+            
+            currentDDBatchData.forEach((item, index) => {
+                let shuffledWords = [...item.words].sort(() => 0.5 - Math.random());
+                
+                let poolHTML = shuffledWords.map((word, wIdx) => 
+                    `<div class="builder-word" draggable="true" id="p_${index}_${wIdx}">${word}</div>`
+                ).join('');
+                
+                let slotsHTML = item.correct.map(() => `<div class="builder-slot" style="width:auto; min-width:80px; padding:0 10px;"></div>`).join('');
+
+                container.innerHTML += `
+                    <div class="dd-batch-item" data-idx="${index}" style="margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.03); border-radius: 16px; border: 2px dashed var(--border-color);">
+                        <p style="font-size: 1.1em; font-weight: 800; margin-top: 0;">${index + 1}. ${item.en}</p>
+                        <div class="builder-pool practice-dd-pool" id="pool-${index}" style="flex-wrap: wrap; margin-bottom: 10px; min-height: 60px;">${poolHTML}</div>
+                        <div class="builder-pool practice-dd-slots" id="slots-${index}" style="flex-wrap: wrap; min-height: 60px;">${slotsHTML}</div>
+                    </div>
+                `;
+            });
+
+            attachPracticeDragEvents();
+            
+            const fb = document.getElementById('practice-dd-feedback');
+            fb.className = 'feedback-area';
+            fb.style.display = 'none';
+        }
+
+        function attachPracticeDragEvents() {
+            const allWords = document.querySelectorAll('#dd-batch-container .builder-word');
+            const allSlots = document.querySelectorAll('#dd-batch-container .builder-slot, #dd-batch-container .builder-pool');
+            
+            allWords.forEach(word => {
+                word.addEventListener('dragstart', function(e) { 
+                    draggedWord = this; 
+                    setTimeout(() => this.style.opacity = '0.5', 0); 
+                });
+                word.addEventListener('dragend', function() { 
+                    draggedWord = null; 
+                    this.style.opacity = '1'; 
+                });
+            });
+
+            // iPad Safari: HTML5 drag/drop is unreliable for touch input.
+            // Scope touch support exclusively to Activity 3.
+            let touchWord = null;
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchMoved = false;
+            let touchGhost = null;
+
+            function clearTouchDrag() {
+                if (touchWord) touchWord.style.opacity = '1';
+                if (touchGhost) touchGhost.remove();
+                touchWord = null;
+                touchGhost = null;
+                touchMoved = false;
+            }
+
+            function movePracticeWord(word, target) {
+                if (!word || !target) return;
+                const sourceItem = word.closest('.dd-batch-item');
+                const targetItem = target.closest('.dd-batch-item');
+                if (!sourceItem || sourceItem !== targetItem) return;
+                if (!target.matches('.builder-slot, .practice-dd-pool')) return;
+                if (target.classList.contains('builder-slot') && target.querySelector('.builder-word')) return;
+                target.appendChild(word);
+                playSound('pop');
+            }
+
+            allWords.forEach(word => {
+                word.addEventListener('touchstart', function(e) {
+                    if (e.touches.length !== 1) return;
+                    e.preventDefault();
+                    window.getSelection()?.removeAllRanges();
+                    touchWord = this;
+                    touchMoved = false;
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: false });
+
+                word.addEventListener('touchmove', function(e) {
+                    if (touchWord !== this || e.touches.length !== 1) return;
+                    const t = e.touches[0];
+                    if (!touchMoved && Math.hypot(t.clientX - touchStartX, t.clientY - touchStartY) < 8) return;
+                    e.preventDefault();
+                    if (!touchMoved) {
+                        touchMoved = true;
+                        touchGhost = this.cloneNode(true);
+                        touchGhost.removeAttribute('id');
+                        Object.assign(touchGhost.style, {
+                            position: 'fixed', pointerEvents: 'none', zIndex: '9999',
+                            margin: '0', opacity: '0.9', width: this.offsetWidth + 'px',
+                            boxSizing: 'border-box', left: '0', top: '0'
+                        });
+                        document.body.appendChild(touchGhost);
+                        this.style.opacity = '0.35';
+                    }
+                    touchGhost.style.transform = `translate(${t.clientX - touchGhost.offsetWidth / 2}px, ${t.clientY - touchGhost.offsetHeight / 2}px)`;
+                }, { passive: false });
+
+                word.addEventListener('touchend', function(e) {
+                    if (touchWord !== this) return;
+                    if (touchMoved && e.changedTouches.length) {
+                        const t = e.changedTouches[0];
+                        const hit = document.elementFromPoint(t.clientX, t.clientY);
+                        const target = hit && hit.closest('.builder-slot, .practice-dd-pool');
+                        movePracticeWord(this, target);
+                        e.preventDefault();
+                    }
+                    clearTouchDrag();
+                }, { passive: false });
+                word.addEventListener('touchcancel', clearTouchDrag, { passive: true });
+            });
+
+            allSlots.forEach(slot => {
+                slot.addEventListener('dragover', e => e.preventDefault());
+                slot.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if(draggedWord && !this.classList.contains('builder-word')) {
+                        const draggedItemParent = draggedWord.closest('.dd-batch-item');
+                        const dropItemParent = this.closest('.dd-batch-item');
+                        
+                        if (draggedItemParent === dropItemParent) {
+                            playSound('pop');
+                            this.appendChild(draggedWord);
+                        }
+                    }
+                });
+            });
+        }
+
+        function checkPracticeDD() {
+            const batchItems = document.querySelectorAll('.dd-batch-item');
+            let allCorrect = true;
+            let complete = true;
+
+            batchItems.forEach(item => {
+                let idx = item.dataset.idx;
+                let expectedArr = currentDDBatchData[idx].correct;
+                let slots = item.querySelectorAll('.practice-dd-slots .builder-slot');
+                
+                let isItemCorrect = true;
+                slots.forEach((slot, sIdx) => {
+                    let wordEl = slot.querySelector('.builder-word');
+                    if (!wordEl) {
+                        complete = false;
+                        isItemCorrect = false;
+                    } else if (wordEl.innerText !== expectedArr[sIdx]) {
+                        isItemCorrect = false;
+                    }
+                });
+
+                if(isItemCorrect && complete) {
+                    item.style.borderColor = "var(--green)";
+                    item.style.backgroundColor = "rgba(16, 185, 129, 0.1)";
+                } else {
+                    item.style.borderColor = "var(--border-color)";
+                    allCorrect = false;
+                }
+            });
+
+            const fb = document.getElementById('practice-dd-feedback');
+            fb.style.display = 'block';
+            if (!complete) {
+                fb.className = 'feedback-area incorrect';
+                fb.innerText = "¡Faltan palabras! Arrastra todas las palabras a sus cajas vacías.";
+                playSound('wrong');
+            } else if (allCorrect) {
+                fb.className = 'feedback-area correct';
+                fb.innerText = "🌟 ¡Excelente! Todas las oraciones son correctas.";
+                playSound('correct');
+                confetti({particleCount: 100, spread: 70, origin: {y: 0.6}});
+            } else {
+                fb.className = 'feedback-area incorrect';
+                fb.innerText = "❌ Hay errores. Revisa el orden de las palabras.";
+                playSound('wrong');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            generateFillIn();
+            generatePracticeDD();
+        });
+
+        // --- 8. FLASHCARDS ---
+        let flashcardIndex = 0;
+        const fcData = quizBank.map(q => {
+            return {
+                front: q.es.replace("_____", `<span style="text-decoration:underline; color:var(--primary-color);">________</span>`),
+                back: q.correct,
+                en: q.en
+            };
+        });
+
+        function renderMainFlashcard() {
+            const card = document.getElementById('main-flashcard');
+            card.classList.remove('is-flipped');
+            setTimeout(() => {
+                const current = fcData[flashcardIndex];
+                document.getElementById('main-card-front').innerHTML = `${current.front} <br><span style="font-size: 0.5em; color:var(--text-muted); display:block; margin-top:20px;">(${current.en})</span>`;
+                document.getElementById('main-card-back').innerHTML = `${current.back}<br><span class="tts-icon" style="font-size: 0.6em; margin-top:20px;" onclick="event.stopPropagation(); speakText('${current.back}')">🔊 Escuchar</span>`;
+            }, 150);
+        }
+
+        function flipMainCard() {
+            playSound('flip');
+            const card = document.getElementById('main-flashcard');
+            card.classList.toggle('is-flipped');
+            if(card.classList.contains('is-flipped')) {
+                speakText(fcData[flashcardIndex].back);
+            }
+        }
+
+        function nextMainCard() { playSound('pop'); flashcardIndex = (flashcardIndex + 1) % fcData.length; renderMainFlashcard(); }
+        function prevMainCard() { playSound('pop'); flashcardIndex = (flashcardIndex - 1 + fcData.length) % fcData.length; renderMainFlashcard(); }
+
+        renderMainFlashcard();
+
+    </script>
+</body>
+</html>
